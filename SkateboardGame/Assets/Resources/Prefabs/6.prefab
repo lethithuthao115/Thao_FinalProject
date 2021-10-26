@@ -8,16 +8,16 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3361216291190653755}
+  - component: {fileID: 3977929585559870521}
   m_Layer: 0
-  m_Name: Skateboard 2
+  m_Name: 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3361216291190653755
-Transform:
+--- !u!224 &3977929585559870521
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -25,18 +25,23 @@ Transform:
   m_GameObject: {fileID: 3286518749726485022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 80, y: 80, z: 80}
   m_Children:
   - {fileID: 6359447303622752733}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &6902877887066709558
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 3361216291190653755}
+    m_TransformParent: {fileID: 3977929585559870521}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 43aefb1c0323414419302ab6bae7fd93, type: 3}
       propertyPath: m_RootOrder
@@ -101,7 +106,7 @@ PrefabInstance:
     - target: {fileID: 2229032678205019293, guid: 43aefb1c0323414419302ab6bae7fd93, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2673566b3419f0f4d870da84659aabee, type: 2}
+      objectReference: {fileID: 2100000, guid: dfc671ba47402db49a8dafefddf1fb1a, type: 2}
     - target: {fileID: 5866666021909216657, guid: 43aefb1c0323414419302ab6bae7fd93, type: 3}
       propertyPath: m_Controller
       value: 
