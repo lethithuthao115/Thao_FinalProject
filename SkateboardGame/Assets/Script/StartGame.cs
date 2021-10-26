@@ -8,8 +8,14 @@ public class StartGame : MonoBehaviour
     {
         SceneManager.sceneLoaded += (arg0, mode) =>
         {
-            //if (GameManager.Instance != null)
-            //    GameManager.Instance.SetNumberItem();
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.SetNumberItem();
+            }
+            else
+            {
+                //GameManager.;
+            }    
         };
     }
 

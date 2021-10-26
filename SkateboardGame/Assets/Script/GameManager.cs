@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
     private int _score = 0;
 
+    [SerializeField]
     private int _totalItem;
 
     public UnityEvent<int> UpdateScore;
@@ -35,6 +37,11 @@ public class GameManager : Singleton<GameManager>
 
     void EndGame()
     {
-        SceneManager.LoadScene("StartLession10");
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    private void OnDestroy()
+    {
+        //gameObject.SetActive(false);
     }
 }

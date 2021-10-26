@@ -14,31 +14,26 @@ public class PlayerController : MonoBehaviour
 
     private float verticalInput;
 
+    private float power = 400f;
+
     private void Awake()
     {
         rgbd = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
 
-        verticalInput = Input.GetAxis("Vertical");
-
-       
-
-        var angle = Time.deltaTime * turnSpeed * horizontalInput;
+        float angle = Time.deltaTime * turnSpeed * horizontalInput;
 
         transform.Rotate(Vector3.up, angle);
 
-        transform.position += Time.deltaTime * speed * verticalInput * Vector3.forward;
     }
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        //print(verticalInput);
-        //Vector3 force = Vector3.forward * speed * Time.deltaTime * verticalInput;
-        //print(force);
-       // rgbd.AddForce(force);
+        verticalInput = Input.GetAxis("Vertical");
+        rgbd.AddForce(Vector3.forward * speed * verticalInput * Time.deltaTime * power);
     }
 }
