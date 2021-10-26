@@ -5,34 +5,38 @@ using UnityEngine.UI;
 
 public class Presenter : MonoBehaviour
 {
-    private int playerIndex;
-    private GameObject prefabPlayer;
-    private GameObject player;
+    private int skateboardIndex;
 
     private const string PLAYER_KEY = "KEY";
 
     public Button nextBtn;
     public Button prevBtn;
 
+    [SerializeField]
+    private GameObject skateboard;
+    [SerializeField]
+    private GameObject skateboardPreb;
+
+
     private void Awake()
     {
-        playerIndex = DataPlayer.GetCurrentSkateboardId();
+        skateboardIndex = DataPlayer.GetCurrentSkateboardId();
         nextBtn.onClick.AddListener(OnNext);
         prevBtn.onClick.AddListener(OnPrev);
     }
 
     private void OnPrev()
     {
-        playerIndex = DataPlayer.GetPrevSkateboard();
-        Destroy(player);
+        skateboardIndex = DataPlayer.GetPrevSkateboard();
+        Destroy(skateboard);
 
         StartCoroutine(InitPlayer());
     }
 
     private void OnNext()
     {
-        playerIndex = DataPlayer.GetNextSkateboard();
-        Destroy(player);
+        skateboardIndex = DataPlayer.GetNextSkateboard();
+        Destroy(skateboard);
 
         StartCoroutine(InitPlayer());
     }
@@ -44,14 +48,14 @@ public class Presenter : MonoBehaviour
 
     private IEnumerator InitPlayer()
     {
-        var request = Resources.LoadAsync<GameObject>($"{playerIndex}");
+        var request = Resources.LoadAsync<GameObject>($"Prefabs/{skateboardIndex}");
 
         while (!request.isDone)
         {
             yield return null;
         }
 
-        prefabPlayer = (GameObject)request.asset;
+        skateboardPreb = (GameObject)request.asset;
 
         SetPlayer();
         SetPlayerState(true);
@@ -83,14 +87,14 @@ public class Presenter : MonoBehaviour
         //
         // player = playerList[playerIndex];
 
-        player = GameObject.Instantiate(prefabPlayer);
-        player.transform.localPosition = new Vector3(0, -2.52f, 26.3f);
-        player.transform.localScale = Vector3.one * 6f;
+        skateboard = GameObject.Instantiate(skateboardPreb);
+        skateboard.transform.localPosition = new Vector3(5, -10, 25);
+        skateboard.transform.localScale = Vector3.one * 10f;
 
     }
 
     public void SetPlayerState(bool isActive)
     {
-        player.gameObject.SetActive(isActive);
+        skateboard.gameObject.SetActive(isActive);
     }
 }

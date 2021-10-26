@@ -8,7 +8,7 @@ public static class DataPlayer
     private const string PLAYER_DATA = "player_data";
     public static AllData playerData;
 
-    private static UnityEvent updateSource;
+    private static UnityEvent updateCoin = new UnityEvent();
     static DataPlayer()
     {
         playerData = JsonUtility.FromJson<AllData>(PlayerPrefs.GetString(PLAYER_DATA));
@@ -20,6 +20,9 @@ public static class DataPlayer
             playerData.currentSkateboard = 1;
 
             playerData.skateboardList.Add(1);
+
+            playerData.coin = 10000;
+
             SaveDataPlayer();
         }
     }
@@ -29,20 +32,19 @@ public static class DataPlayer
         PlayerPrefs.SetString(PLAYER_DATA, JsonUtility.ToJson(playerData));
     }
 
-    public static void AddListener(Action action)
+    public static void AddListener(UnityAction updateView)
     {
-        updateSource?.AddListener(action.Invoke);
+        updateCoin?.AddListener(updateView.Invoke);
     }
 
-    public static void RemoveListener(Action action)
+    public static void RemoveListener(UnityAction updateView)
     {
-        updateSource?.RemoveListener(action.Invoke);
+        updateCoin?.RemoveListener(updateView.Invoke);
     }
 
     public static void AddSkateboard(int id)
     {
         playerData.AddSkateboard(id);
-        updateSource?.Invoke();
 
         SaveDataPlayer();
     }
@@ -50,7 +52,7 @@ public static class DataPlayer
     public static void AddCoin(int coin)
     {
         playerData.AddCoin(coin);
-        updateSource?.Invoke();
+        //updateCoin?.Invoke();
 
         SaveDataPlayer();
     }
@@ -58,6 +60,7 @@ public static class DataPlayer
     public static void SubCoin(int coin)
     {
         playerData.SubCoin(coin);
+        updateCoin?.Invoke();
 
         SaveDataPlayer();
     }
@@ -75,6 +78,11 @@ public static class DataPlayer
     public static int GetNextSkateboard()
     {
         return playerData.GetNextSkateboard();
+    }
+
+    public static bool IsEnoughMoney(int price)
+    {
+        return playerData.IsEnoughCoin(price);
     }
 }
 
@@ -127,5 +135,10 @@ public class AllData
 
         currentSkateboard = kartId;
         return currentSkateboard;
+    }
+
+    public bool IsEnoughCoin(int price)
+    {
+        return (coin >= price);
     }
 }

@@ -32,8 +32,16 @@ public class UIShopElement : MonoBehaviour
 
     private void OnPurchase()
     {
-        DataPlayer.AddSkateboard(id);
-
-        SetData();
+        bool canPurchase = DataPlayer.playerData.IsEnoughCoin(cost);
+        if(canPurchase)
+        {
+            DataPlayer.AddSkateboard(id);
+            SetData();
+            DataPlayer.SubCoin(cost);
+        }
+        else
+        {
+            Debug.Log("Do not have enough money");
+        }
     }
 }
