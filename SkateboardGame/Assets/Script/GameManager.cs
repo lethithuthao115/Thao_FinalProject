@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private int _totalItem;
 
-    public UnityEvent<int> UpdateScore;
+    public UnityEvent<int> UpdateScore = new UnityEvent<int>();
 
     public void SetNumberItem()
     {

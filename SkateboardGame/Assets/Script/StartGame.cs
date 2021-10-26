@@ -12,10 +12,7 @@ public class StartGame : MonoBehaviour
             {
                 GameManager.Instance.SetNumberItem();
             }
-            else
-            {
-                //GameManager.;
-            }    
+           
         };
     }
 

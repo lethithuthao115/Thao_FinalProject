@@ -6,10 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rgbd;
 
-    public float speed = 5;
+    [SerializeField]
+    private Animator animator;
 
-    public float turnSpeed = 20;
+    [SerializeField]
+    private float speed = 5;
 
+    [SerializeField]
+    private float turnSpeed = 20;
+    
     private float horizontalInput;
 
     private float verticalInput;
@@ -34,6 +39,12 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         verticalInput = Input.GetAxis("Vertical");
-        rgbd.AddForce(Vector3.forward * speed * verticalInput * Time.deltaTime * power);
+        rgbd.AddRelativeForce(Vector3.forward * speed * verticalInput * Time.deltaTime * power);
     }
+
+    public void JumpTrigger()
+    {
+        animator.SetTrigger("Jump");
+    }
+
 }
