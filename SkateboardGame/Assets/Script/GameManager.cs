@@ -9,10 +9,14 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private int _totalItem;
 
+    [SerializeField]
+    ObjectiveManager m_ObjectiveManager;
+
     public UnityEvent<int> UpdateScore = new UnityEvent<int>();
 
     public void SetNumberItem()
     {
+        m_ObjectiveManager = FindObjectOfType<ObjectiveManager>();
         _totalItem = FindObjectsOfType<Item>().Length;
     }
 
@@ -22,20 +26,12 @@ public class GameManager : Singleton<GameManager>
 
         UpdateScore?.Invoke(this._score);
 
-        print("Current Score: " + this._score);
-
-        _totalItem--;
-
-        if (_totalItem == 0)
-        {
-            print("Win Game");
-            Invoke(nameof(EndGame), 2);
-        }
+        //print("Current Score: " + this._score);
 
         DataPlayer.AddCoin(100);
     }
 
-    void EndGame()
+    void EndGame(bool isWin)
     {
         SceneManager.LoadScene("MainMenu");
     }
@@ -43,5 +39,17 @@ public class GameManager : Singleton<GameManager>
     private void OnDestroy()
     {
         //gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (m_ObjectiveManager && m_ObjectiveManager.AreAllObjectivesCompleted())
+        {
+            EndGame(true);
+        }
+                 
+
+        //if (m_TimeManager.IsFinite && m_TimeManager.IsOver)
+        //    EndGame(false);
     }
 }
